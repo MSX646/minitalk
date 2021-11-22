@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kezekiel <kezekiel@student.21-schoo>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/22 14:45:53 by kezekiel          #+#    #+#             */
+/*   Updated: 2021/11/22 14:52:54 by kezekiel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 static int	ft_isdigit(int c)
@@ -48,18 +60,17 @@ int	main(int argc, char **argv)
 
 	if (argc != 3 || !argv[2] || !ft_isdigit(argv[1][0]))
 	{
-      write(2, "Usage: <PID> <MSG>\n", 19);
-      exit(1);
-    }
-    sig.sa_flags = SA_SIGINFO;
-	//sigemptyset(&sig.sa_mask);
-    sig.sa_handler = client_handler;
-	if (sigaction(SIGUSR1, &sig, 0) == -1||
-	    sigaction(SIGUSR2, &sig, 0) == -1)
-    {
-      write(2, "Sigaction error\n", 16);
-      exit(1);
-    }
+		write(2, "Usage: <PID> <MSG>\n", 19);
+		exit(1);
+	}
+	sig.sa_flags = SA_SIGINFO;
+	sigemptyset(&sig.sa_mask);
+	sig.sa_handler = client_handler;
+	if (sigaction(SIGUSR1, &sig, 0) == -1 || sigaction(SIGUSR2, &sig, 0) == -1)
+	{
+		write(2, "Sigaction error\n", 16);
+		exit(1);
+	}
 	sender(ft_atoi(argv[1]), argv[2]);
 	while (1)
 		pause();

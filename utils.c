@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kezekiel <kezekiel@student.21-schoo>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/22 14:56:50 by kezekiel          #+#    #+#             */
+/*   Updated: 2021/11/22 14:57:15 by kezekiel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minitalk.h"
 
 void	ft_putchar(char c)
@@ -62,10 +74,10 @@ int	ft_atoi(const char *str)
 }
 
 void	send_sig(int pid, int signum)
-{			
+{		
 	if (kill(pid, signum) == -1)
 	{
-      write(2, "Signal error\n", 13);
-      exit(EXIT_FAILURE);
-    }
+		write(2, "Signal error\n", 13);
+		exit(EXIT_FAILURE);
+	}
 }
